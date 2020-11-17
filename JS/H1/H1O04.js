@@ -6,16 +6,15 @@ function setup() {
 }
 
 function draw() {
-  // teken de grond
   noStroke();
   fill('wheat');
   rect(0,350,450,100);
-  // teken het huis
   strokeWeight(4);
   stroke('darkgrey');
   fill('lightgray');
   rect(100,280,100,100);
   fill('gray');
+  triangle(100,280,200,280,150,200)
   // VERVANG DEZE REGEL door een regel die het dak tekent
   // teken de deur
   noStroke();
