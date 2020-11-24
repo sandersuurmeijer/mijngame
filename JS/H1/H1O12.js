@@ -6,6 +6,7 @@ function setup() {
   canvas.parent('processing');
   textFont("Verdana");
   textSize(14);
+
 }
 
 function draw() {
@@ -13,7 +14,7 @@ function draw() {
   fill('black');
   text("mouseX:" + round(mouseX) + " mouseY:" + round(mouseY),10,20);
   text("xJOS:" + xJOS + " yJOS:" + yJOS,300,20);
-  translate(xJOS,yJOS);
+  translate(mouseX,mouseY);
   
   // in de volgende regels wordt JOS getekend
 
@@ -34,6 +35,7 @@ function draw() {
   fill('white');
   arc(0, 40, 80, 40, 0, PI, CHORD);
   pop();
+
   // einde tekenen JOS
   
 }
