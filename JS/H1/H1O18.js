@@ -11,17 +11,20 @@ function setup() {
 }
 
 function draw() {
-  background(0,0,75,1);
-  tekenSter(xPositie,yPositie);
+  background(0,0,75,0.1);
+  tekenSter(xPositie,yPositie,schaal);
+  xPositie += 5;
+  yPositie += 1;
+  schaal += 0.05;
 }
 
-function tekenSter(x,y) {
+function tekenSter(x,y,s) {
   push();
-  scale(1);
+  scale(s);
   strokeWeight(2);
   stroke('white');
   fill('khaki');
-  translate(x,y);
+  translate(x,y,);
   triangle(0,0,80,0,40,65);
   translate(0,40);
   triangle(0,0,80,0,40,-65);
