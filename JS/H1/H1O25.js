@@ -27,19 +27,15 @@ function draw() {
   yPositie += ySnelheid;
   fill(255,255,255,1);
   ellipse(xPositie,yPositie,2*straal);  
-  
-  
- onderlingeAfstand=round(dist(550,height - straal,xPositie,yPositie)) - 2*straal;
- // if (onderlingeAfstand <= 0) {
-    //eindScherm();
-   // noLoop();
-//  }
-  
-  // Om het wat moeilijker te maken veranderen er bij gebruik van een pijltoets 2 dingen tegelijkertijd.
+  onderlingeAfstand=round(dist(550,height - straal,xPositie,yPositie)) - 2*straal;
+  if (onderlingeAfstand <= 0) {
+    eindScherm();
+    noLoop();
+  }
   
   gebruikBesturing();
 
-    if (yPositie<straal || yPositie>height - straal) {
+  if (yPositie<straal || yPositie>height - straal) {
     ySnelheid *= -1;
   }
   if (xPositie<straal || xPositie>width - straal) {
