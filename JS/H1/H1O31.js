@@ -11,6 +11,18 @@ function draw() {
     for (var kolom = 0;kolom < 450;kolom += 50) {
       fill(kleur);
       rect(kolom,rij,50,50);
+      if (kleur == 'white') {
+          kleur = 'black';
+      }
+      else {
+          kleur = 'white';
+      }
     }
+    if (kleur == 'white') {
+    kleur = 'black';
+      }
+    else {
+        kleur = 'white';
+      }
   }
 }
