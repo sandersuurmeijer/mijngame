@@ -4,7 +4,7 @@ function setup() {
   canvas = createCanvas(501,501);
   canvas.parent('processing');
   background('coral');
-  noLoop();
+ noLoop();
 }
 
 function draw() {
