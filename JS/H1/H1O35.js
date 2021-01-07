@@ -1,4 +1,5 @@
-var aantalLagen = 5;
+var aantalLagen = 10
+;
 var breedte = 90;
 var hoogte;
 
@@ -15,7 +16,7 @@ function setup() {
 function draw() {
     for (var laag = 1;laag <= aantalLagen;laag++) {
      tekenRij(laag);
-     translate0,hoogte
+     translate(0,hoogte)
     }
 }
 
