@@ -1,5 +1,5 @@
-var aantalRijenRaster = 6;
-var aantalKolommenRaster = 9;
+var aantalRijenRaster = 12;
+var aantalKolommenRaster = 18;
 var celGrootte;
 
 var animatie = [];
@@ -12,7 +12,11 @@ var yJos = 300;
 
 function preload() {
   brug = loadImage("images/backgrounds/dame_op_brug_1800.jpg");
-  frame = loadImage("images/sprites/Jos100px/Jos_0.png");
+  for (var h = 0;h < aantalBeeldjes;h++) {
+    frame = loadImage("images/sprites/Jos100px/Jos_" + h + ".png");
+    animatie.push(frame);
+  }
+
 }
 
 function setup() {
@@ -28,21 +32,26 @@ function draw() {
 
   if (keyIsDown(LEFT_ARROW)) {
     xJos -= celGrootte;
+    nummer=2;
   }
   if (keyIsDown(RIGHT_ARROW)) {
     xJos += celGrootte;
+    nummer=1;
   }
   if (keyIsDown(UP_ARROW)) {
     yJos-=celGrootte;
+    nummer=4;
   }
   if (keyIsDown(DOWN_ARROW)) {
     yJos += celGrootte;
+    nummer=5;
   }
   
   xJos = constrain(xJos,0,width - celGrootte);
   yJos = constrain(yJos,0,height - celGrootte);
   
-  image(frame,xJos,yJos);
+  image(animatie[nummer],xJos,yJos,celGrootte,celGrootte);
+
 }
 
 function tekenRaster() {
