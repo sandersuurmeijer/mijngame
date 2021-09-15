@@ -1,6 +1,34 @@
+var bol = {
+  diameter: 150,
+  positieX: 200,
+  positieY: 200,
+  snelheid: 5,
+  
+   teken(){
+   fill('red');
+   ellipse(this.positieX, this.positieY, this.diameter);
+   },
+
+   beweeg(){
+     if(keyIsDown(RIGHT_ARROW)){
+     this.positieX+=this.snelheid;
+     }
+     if(keyIsDown(LEFT_ARROW)){
+      this.positieX-=this.snelheid;
+      }
+      if(keyIsDown(UP_ARROW)){
+        this.positieY-=this.snelheid;
+        }
+        if(keyIsDown(DOWN_ARROW)){
+          this.positieY+=this.snelheid;
+          }
+   }
+
+  }
+
 function setup() {
   canvas = createCanvas(450,450);
-  background('silver');
+
   canvas.parent('processing');
   //noLoop();
 
@@ -8,24 +36,7 @@ function setup() {
 
 function draw() {
   noStroke();
-
-for(var n=0; n<5; n++) {
-  fill('red')
-  if ( n=3){
-    fill('blue')
-  }
-  rect(0,250,50,50)
-  translate(100,0)
-  
-}
-
-
-
-
-
-
-// fill('steelblue');
-//  ellipse(0,0,800);
-//  fill('deepskyblue');
-//  ellipse(450,450,400);
+  background('silver');
+  bol.teken();
+  bol.beweeg();
 }
