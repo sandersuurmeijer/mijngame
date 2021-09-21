@@ -32,7 +32,7 @@ function setup() {
   textSize(60);
   textAlign(CENTER,CENTER);
   noStroke();
-  frameRate(5);
+  frameRate(20);
 }
 
 function draw() {
@@ -49,7 +49,7 @@ function draw() {
       fill('red');
       rect(0,0,canvas.width,canvas.height);
       fill('white');
-      text("ik zei: maximaal VIER keer!!!",0,0,canvas.width,canvas.height);
+      text("ik zei: maximaal VIER keer! Jij kan echt niet lezen he domme.",0,0,canvas.width,canvas.height);
     }
   }
 }
