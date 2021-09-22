@@ -26,6 +26,7 @@ var jos = {
   aantalFrames: 6,
   frameNummer: 3,
   stapGrootte: null,
+  gewonnen:false,
 
   beweeg() {
     if (keyIsDown(LEFT_ARROW)) {
@@ -50,7 +51,9 @@ var jos = {
   },
 
   wordtGeraakt(vijand) {
-    return false;
+    if(jos.x == alice.x && jos.y == alice.y){
+    return true;
+    }
   },
 
   toon() {
@@ -102,6 +105,7 @@ function draw() {
   raster.teken();
   jos.beweeg();
   jos.toon();
+  alice.beweeg();
   alice.toon();
 
   if (jos.wordtGeraakt(alice)) {
