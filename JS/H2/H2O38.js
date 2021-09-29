@@ -1,12 +1,12 @@
 class Knikker {
   constructor(x,y,kl) {
-    this.diameter = 40;
+    this.diameter = 3;
     this.straal = this.diameter / 2;
     this.x = x;
     this.y = y;
     this.snelheidX = random(1,10);
     this.snelheidY = random(1,10);
-    this.kleur = kl;
+    this.kleur = [random(0, 255), random(0, 255), random(0, 255)];
   }
 
   beweeg() {
@@ -32,24 +32,24 @@ var knikkerVerzameling = [];
 function setup() {
   canvas = createCanvas(1000,300);
   canvas.parent('processing');
-  frameRate(50);
+  frameRate(120);
   colorMode(RGB,255,255,255,1);
-  background(0,0,75,1);
+  background(50);
   noStroke();
-  for (var k = 0; k < 10; k++) {
+  for (var k = 0; k < 9999; k++) {
     knikkerVerzameling.push(new Knikker(random(20,980),random(20,280),'white'));
   }  
 }
 
 function draw() {
-  background(0,0,75,0.2);
+  background(120, 120, 120,0.2);
   for (var i = 0; i < knikkerVerzameling.length; i++) {
     knikkerVerzameling[i].beweeg();
     knikkerVerzameling[i].teken();
   } 
   if (mouseIsPressed) {
-    for (var i = 0; i < knikkerVerzameling.length; i++) {
-      knikkerVerzameling[i].beweeg();
+    for (let i=0; i < 10; i++) {
+      knikkerVerzameling.push(new Knikker(mouseX,mouseY,0));
     }
   }
 }
