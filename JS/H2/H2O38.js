@@ -32,7 +32,7 @@ var knikkerVerzameling = [];
 function setup() {
   canvas = createCanvas(1000,300);
   canvas.parent('processing');
-  frameRate(120);
+  frameRate(360);
   colorMode(RGB,255,255,255,1);
   background(50);
   noStroke();

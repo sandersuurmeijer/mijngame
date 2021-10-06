@@ -1,3 +1,4 @@
+
 class Bom {
   constructor() {
     this.x = floor(random(1,raster.aantalKolommen))*raster.celGrootte;
@@ -56,9 +57,13 @@ class Jos {
   }
   
   staatOp(bommenLijst) {
-
+    for (var b = 0;b < bommenLijst.length;b++) {
+      if (bommenLijst[b].x == this.x && bommenLijst[b].y == this.y) {
+        this.staOpBom = true;
+      }
+    }
     return this.staOpBom;
-  }  
+  } 
   
   toon() {
     image(this.animatie[this.frameNummer],this.x,this.y,raster.celGrootte,raster.celGrootte);
@@ -67,6 +72,7 @@ class Jos {
 
 function preload() {
   brug = loadImage("images/backgrounds/dame_op_brug_1800.jpg");
+  onderwater = loadImage("images/backgrounds/onderwater.png");
   bomPlaatje = loadImage("images/sprites/bom_100px.png");
 }
 
@@ -79,10 +85,12 @@ function setup() {
   textFont("Verdana");
   textSize(90);
   
-  raster = new Raster(6,9);
-  
+  raster = new Raster(12,18);
   raster.berekenCelGrootte();
-  bom1 = new Bom();
+  
+  for (var b = 0;b < 100;b++) {
+    bommenArray.push(new Bom());
+  }
   
   eve = new Jos();
   eve.stapGrootte=1*raster.celGrootte;
@@ -101,9 +109,13 @@ function setup() {
 }
 
 function draw() {
-  background(brug);
-  raster.teken();
-  bom1.toon();
+//  background(brug);
+ background(onderwater);
+ raster.teken();
+
+  for (var b = 0;b < bommenArray.length;b++) {
+    bommenArray[b].toon();
+  }
 
   if (eve.aanDeBeurt) {
     eve.beweeg();
