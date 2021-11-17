@@ -18,9 +18,9 @@ var gameSettings = [200,2,0.5,0.2,3];
 
 
 class Vogel {
-  constructor(png) {
-    this.afbeelding = png;
-    this.breedte = 50;
+  constructor(jpg) {
+    this.afbeelding = jpg;
+    this.breedte = 150;
     this.marge = 5;
     this.hoogte = round(this.breedte / this.afbeelding.width * this.afbeelding.height);
     this.x = 10;
@@ -31,7 +31,7 @@ class Vogel {
   }
 
   vlieg() {
-    this.vy -= 30 * this.a;
+  this.vy -= 30 * this.a;
     if (this.y == 0) {
       this.vy = 0;
     }
@@ -112,6 +112,7 @@ class Bluebird {
             this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1));
     }
     this.eindTekst = "HELAAS: je bent AF.";
+    this.startTijd = null;
   }
 
   maakObstakel(x) {
@@ -183,11 +184,21 @@ class Bluebird {
 
   tekenScorebord() {
       push();
-
+      if (!this.afgelopen && this.speler.vx == 0) {
+        var score = floor((frameCount - this.startTijd) / 100) + 10 * this.snelheidObstakels - 10 - gameSettings[4];
+        var level = 1 + floor((frameCount - this.startTijd) / 500);
+        fill(250,250,250,.5);
+        noStroke();
+        rect(30,30,200,70);
+        fill(20);
+        textSize(28);
+        text('score: '+score+"\n level "+level,12,12,200,70);  
+      }
       pop();
   }
 
   teken() {
+    background(255); // svg bug
     background(achtergrond);
     if (!this.actief) {
       this.beginScherm();
@@ -214,8 +225,8 @@ var canvasH = 400;
 var canvasB;
 
 function preload() {
-  vogelblauw = loadImage("images/sprites/bluebird_R.png");
-  achtergrond = loadImage("images/backgrounds/city_skyline.svg");
+  vogelblauw = loadImage("images/jemoeder.jpg");
+  achtergrond = loadImage("images/achtergrond.jpg");
 }
 
 function setup() {
@@ -232,7 +243,7 @@ function setup() {
 }
 
 function draw() {
-  background(255); // svg bug    
+  background(255); // svg bug      
   spel.update();
   spel.teken();
 }
@@ -240,6 +251,7 @@ function draw() {
 function keyTyped() {
   if (!spel.actief && keyCode == ENTER) {
     spel.actief = true;
+    spel.startTijd = frameCount;
   }
   else {
     if (!spel.afgelopen && keyCode == 32) {

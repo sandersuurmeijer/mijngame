@@ -18,8 +18,8 @@ var gameSettings = [200,2,0.5,0.2,3];
 
 
 class Vogel {
-  constructor(png) {
-    this.afbeelding = png;
+  constructor(jpg) {
+    this.afbeelding = jpg;
     this.breedte = 50;
     this.marge = 5;
     this.hoogte = round(this.breedte / this.afbeelding.width * this.afbeelding.height);
@@ -225,8 +225,8 @@ var canvasH = 400;
 var canvasB;
 
 function preload() {
-  vogelblauw = loadImage("images/sprites/bluebird_R.png");
-  achtergrond = loadImage("images/backgrounds/city_skyline.svg");
+  vogelblauw = loadImage("images/jemoeder.jpg");
+  achtergrond = loadImage("images/achtergrond.jpg");
 }
 
 function setup() {
