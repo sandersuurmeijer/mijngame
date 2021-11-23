@@ -1,28 +1,11 @@
-/* aanwijzing: gameSettings = [
-    onderlinge afstand tussen de obstakels,
-    parameter voor de grootte van de obstakels,
-    factor voor de verandering van de grootte van de obstakels,
-    snelheidsverandering van de obstakels,
-    aantal nieuwe obstakels voordat de snelheid wordt verhoogd
-    ]
-
-   oorspronkelijke settings:
-   var gameSettings = [200,2,0.5,0.2,3];
-*/
-
 var gameSettings = [200,2,0.5,0.2,3];
 
-/*  **********************************************************
-    **                  BEGIN klasse Vogel                  **
-    ********************************************************** */
-
-
-class Vogel {
+class vliegtuig {
   constructor(jpg) {
     this.afbeelding = jpg;
-    this.breedte = 150;
+    this.breedte = 150 * 2 / 3;
     this.marge = 5;
-    this.hoogte = round(this.breedte / this.afbeelding.width * this.afbeelding.height);
+    this.hoogte = (this.breedte / this.afbeelding.width * this.afbeelding.height);
     this.x = 10;
     this.y = 150;
     this.vx = 1;
@@ -53,17 +36,14 @@ class Vogel {
   }
 }
 
-/*  **********************************************************
-    **     EINDE klasse Vogel      BEGIN klasse Obstakel    **
-    ********************************************************** */
-
 
 class Obstakel {
-  constructor(x,y,b,h) {
+  constructor(x,y,b,h,png) {
     this.x = x;
     this.y = y;
     this.b = b;
     this.h = h;
+    this.toren = png
   }
 
   beweeg(v) {
@@ -71,9 +51,9 @@ class Obstakel {
   }
 
 
-  raakt(vogel) {
-    if (vogel.x + vogel.breedte - vogel.marge > this.x && vogel.x + vogel.marge < this.x + this.b &&
-        vogel.y + vogel.hoogte - vogel.marge > this.y && vogel.y + vogel.marge < this.y + this.h) {
+  raakt(vliegtuig) {
+    if (vliegtuig.x + vliegtuig.breedte - vliegtuig.marge > this.x && vliegtuig.x + vliegtuig.marge < this.x + this.b &&
+      vliegtuig.y + vliegtuig.hoogte - vliegtuig.marge > this.y && vliegtuig.y + vliegtuig.marge < this.y + this.h) {
       return true;
     }
     else {
@@ -84,20 +64,15 @@ class Obstakel {
   teken() {
     push();
     noStroke();
-    fill(0,0,255,0.7);
-    rect(this.x,this.y,this.b,this.h);
+    image (this.toren);
     pop();
   }
 }
 
-/*  **********************************************************
-    **    EINDE klasse Obstakel    BEGIN klasse Bluebird    **
-    ********************************************************** */
 
-
-class Bluebird {
+class Boeing {
   constructor(settings) {
-    this.speler = new Vogel(vogelblauw);
+    this.speler = new vliegtuig (F16);
     this.actief = false;
     this.afgelopen = false;
     this.afstandObstakels = settings[0];
@@ -111,7 +86,7 @@ class Bluebird {
         for (var o = 0;o<this.aantalObstakels;o++) {
             this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1));
     }
-    this.eindTekst = "HELAAS: je bent AF.";
+    this.eindTekst = "je bent af LOSER";
     this.startTijd = null;
   }
 
@@ -131,12 +106,12 @@ class Bluebird {
     stroke(0,0,200,.8);
     strokeWeight(5);
     textSize(150);
-    text(" BLUEBIRD",0,0,canvas.width,canvas.height / 2);
+   // text(" BLUEBIRD",0,0,canvas.width,canvas.height / 2);
     textSize(44);
     strokeWeight(2);
     stroke(0);
     fill(200,200,200,.5);
-    text("\nGebruik SPATIE om te vliegen\nen ontwijk de obstakels.\nDruk ENTER om te starten.\n",0,0,canvas.width,canvas.height * 2 / 3);
+    text("Gebruik SPATIE om te vliegen en ontwijk de obstakels.Druk ENTER om te starten.",0,0,canvas.width,canvas.height);
     pop();
   }
 
@@ -216,16 +191,12 @@ class Bluebird {
   }
 }
 
-/*  **********************************************************
-    **    EINDE klasse Bluebird     BEGIN hoofdprogramma    **
-    ********************************************************** */
-
 
 var canvasH = 400;
 var canvasB;
 
 function preload() {
-  vogelblauw = loadImage("images/jemoeder.jpg");
+  F16 = loadImage("images/jemoeder.jpg");
   achtergrond = loadImage("images/achtergrond.jpg");
 }
 
@@ -239,7 +210,7 @@ function setup() {
   textFont("Monospace");
   textSize(44);
   textAlign(CENTER,CENTER);
-  spel = new Bluebird(gameSettings);
+  spel = new Boeing(gameSettings);
 }
 
 function draw() {
@@ -262,7 +233,3 @@ function keyTyped() {
     setup();
   }
 }
-
-/*  **********************************************************
-    **               EINDE hoofdprogramma                   **
-    ********************************************************** */

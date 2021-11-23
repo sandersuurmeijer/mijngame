@@ -106,6 +106,9 @@ function setup() {
   bob = new Vijand(600,400);
   bob.stapGrootte = 1*eve.stapGrootte;
   bob.sprite = loadImage("images/sprites/Bob100px/Bob.png");  
+
+  toren = new Obstakel(50,100)
+  toren.teken = rect(this.x,this.y,this.b,this.h);
 }
 
 function draw() {
@@ -133,6 +136,7 @@ function draw() {
   eve.toon();
   alice.toon();
   bob.toon();
+  toren.toon();
   
   if (eve.wordtGeraakt(alice) || eve.wordtGeraakt(bob) || eve.staatOp(bommenArray)) {
     background('red');
@@ -193,5 +197,16 @@ class Vijand {
   
   toon() {
     image(this.sprite,this.x,this.y,raster.celGrootte,raster.celGrootte);
+  }
+}
+
+class Obstakel {
+  constructor(x,y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  toon() {
+    image(this.teken,this.x,this.y,raster.celGrootte,raster.celGrootte);
   }
 }
