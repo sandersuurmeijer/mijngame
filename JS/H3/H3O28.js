@@ -1,4 +1,4 @@
-var gameSettings = [200,2,0.5,0.2,3];
+var gameSettings = [200,6,0.5,0.2,3];
 
 class vliegtuig {
   constructor(jpg) {
@@ -43,7 +43,7 @@ class Obstakel {
     this.y = y;
     this.b = b;
     this.h = h;
-    this.toren = png
+    this.wolkenkrabber = png;
   }
 
   beweeg(v) {
@@ -64,13 +64,45 @@ class Obstakel {
   teken() {
     push();
     noStroke();
-    image (this.toren);
+    image(this.wolkenkrabber,this.x,this.y,this.b,this.h);
+    pop();
+  }
+}
+
+class Obstakel2 {
+  constructor(x,y,b,h,png) {
+    this.x = x;
+    this.y = y;
+    this.b = b;
+    this.h = h;
+    this.wolkenkrabber = png;
+  }
+
+  beweeg(v) {
+      this.x -= v;
+  }
+
+
+  raakt(vliegtuig) {
+    if (vliegtuig.x + vliegtuig.breedte - vliegtuig.marge > this.x && vliegtuig.x + vliegtuig.marge < this.x + this.b &&
+      vliegtuig.y + vliegtuig.hoogte - vliegtuig.marge > this.y && vliegtuig.y + vliegtuig.marge < this.y + this.h) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  teken() {
+    push();
+    noStroke();
+    image(this.wolkenkrabber,this.x,this.y,this.b,this.h);
     pop();
   }
 }
 
 
-class Boeing {
+class spelletjuh {
   constructor(settings) {
     this.speler = new vliegtuig (F16);
     this.actief = false;
@@ -92,11 +124,11 @@ class Boeing {
 
   maakObstakel(x) {
         var y = 0;
-        var hoogte = random(canvas.height / (this.grootteObstakels + 2.5),canvas.height / (this.grootteObstakels + 1.5));
+        var hoogte = random((canvas.height + 100) / this.grootteObstakels,(canvas.height + 60) / this.grootteObstakels);
         if (round(random(0,1)) == 0) {
             y = canvas.height - hoogte;
         }
-        this.obstakels.push(new Obstakel(x,y,30,hoogte));
+        this.obstakels.push(new Obstakel(x,300,300,hoogte,wolkenkrabber));
   }
 
   beginScherm() {
@@ -194,10 +226,12 @@ class Boeing {
 
 var canvasH = 400;
 var canvasB;
-
 function preload() {
   F16 = loadImage("images/jemoeder.jpg");
   achtergrond = loadImage("images/achtergrond.jpg");
+  wolkenkrabber = loadImage("images/wolkenkrabber.png");
+  bomraket = loadImage("images/bomraket kopiëren.png")
+
 }
 
 function setup() {
@@ -210,7 +244,7 @@ function setup() {
   textFont("Monospace");
   textSize(44);
   textAlign(CENTER,CENTER);
-  spel = new Boeing(gameSettings);
+  spel = new spelletjuh (gameSettings);
 }
 
 function draw() {
