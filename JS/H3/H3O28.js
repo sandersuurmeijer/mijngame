@@ -1,4 +1,4 @@
-var gameSettings = [200,6,0.5,0.2,3];
+var gameSettings = [200,6,0.5,0.5,3];
 
 class vliegtuig {
   constructor(jpg) {
@@ -96,7 +96,7 @@ class Obstakel2 {
   teken() {
     push();
     noStroke();
-    image(this.wolkenkrabber,this.x,this.y,this.b,this.h);
+    image(this.bomraket,this.x,this.y,this.b,this.h);
     pop();
   }
 }
@@ -115,7 +115,7 @@ class spelletjuh {
     this.snelheidsVeranderingObstakels = settings[3];
     this.veranderingSnelheid = settings[4]; 
     this.obstakels = [];
-        for (var o = 0;o<this.aantalObstakels;o++) {
+        for (var tellen = 0;tellen<this.aantalObstakels;tellen++) {
             this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1));
     }
     this.eindTekst = "je bent af LOSER";
@@ -124,7 +124,7 @@ class spelletjuh {
 
   maakObstakel(x) {
         var y = 0;
-        var hoogte = 150;
+        var hoogte = 200;
         var positie =  random(250, 300);
         if (round(random(0,1)) == 0) {
             y = canvas.height - positie;
@@ -132,19 +132,27 @@ class spelletjuh {
         this.obstakels.push(new Obstakel(x,positie,300,hoogte,wolkenkrabber));
   }
 
+  maakObstakel2(x) {
+    var y = 0;
+    var hoogte = 150;
+    var positie =  random(250, 300);
+    if (round(random(0,1)) == 0) {
+        y = canvas.height - positie;
+    }
+    this.obstakels2.push(new Obstakel2(x,positie,300,hoogte,bomraket));
+}
+
   beginScherm() {
     push();
     textAlign(CENTER,CENTER);
     noFill();
     stroke(0,0,200,.8);
     strokeWeight(5);
-    textSize(150);
-   // text(" BLUEBIRD",0,0,canvas.width,canvas.height / 2);
     textSize(44);
     strokeWeight(2);
     stroke(0);
     fill(200,200,200,.5);
-    text("Gebruik de pijltjestoetsen om te vliegen en ontwijk de obstakels. Druk ENTER om te starten.",0,0,canvas.width,canvas.height);
+    text("Gebruik de pijltjestoetsen om te vliegen en ontwijk de obstakels. Druk enter om te starten.",0,0,canvas.width,canvas.height);
     pop();
   }
 
