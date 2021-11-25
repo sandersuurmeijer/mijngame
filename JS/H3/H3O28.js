@@ -124,11 +124,12 @@ class spelletjuh {
 
   maakObstakel(x) {
         var y = 0;
-        var hoogte = random((canvas.height + 100) / this.grootteObstakels,(canvas.height + 60) / this.grootteObstakels);
+        var hoogte = 150;
+        var positie =  random(250, 300);
         if (round(random(0,1)) == 0) {
-            y = canvas.height - hoogte;
+            y = canvas.height - positie;
         }
-        this.obstakels.push(new Obstakel(x,300,300,hoogte,wolkenkrabber));
+        this.obstakels.push(new Obstakel(x,positie,300,hoogte,wolkenkrabber));
   }
 
   beginScherm() {
@@ -143,7 +144,7 @@ class spelletjuh {
     strokeWeight(2);
     stroke(0);
     fill(200,200,200,.5);
-    text("Gebruik SPATIE om te vliegen en ontwijk de obstakels.Druk ENTER om te starten.",0,0,canvas.width,canvas.height);
+    text("Gebruik de pijltjestoetsen om te vliegen en ontwijk de obstakels. Druk ENTER om te starten.",0,0,canvas.width,canvas.height);
     pop();
   }
 
