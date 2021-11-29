@@ -1,4 +1,4 @@
-var gameSettings = [200,6,0.5,0.5,3];
+//var gameSettings = [200,6,0.5,0.5,3];
 
 class vliegtuig {
   constructor(jpg) {
@@ -103,17 +103,17 @@ class Obstakel2 {
 
 
 class spelletjuh {
-  constructor(settings) {
+  constructor() {
     this.speler = new vliegtuig (F16);
     this.actief = false;
     this.afgelopen = false;
-    this.afstandObstakels = settings[0];
+    this.afstandObstakels = 200;
     this.aantalObstakels = floor(canvas.width / this.afstandObstakels);
-    this.grootteObstakels = settings[1];
-    this.factorObstakels = settings[2];
+    this.grootteObstakels = 6;
+    this.factorObstakels = 0.5;
     this.snelheidObstakels = 0;
-    this.snelheidsVeranderingObstakels = settings[3];
-    this.veranderingSnelheid = settings[4]; 
+    this.snelheidsVeranderingObstakels = 0.5;
+    this.veranderingSnelheid = 3; 
     this.obstakels = [];
         for (var tellen = 0;tellen<this.aantalObstakels;tellen++) {
             this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1));
@@ -177,7 +177,7 @@ class spelletjuh {
       if (this.obstakels[this.obstakels.length - 1].x <= canvas.width - this.afstandObstakels) {
           this.maakObstakel(canvas.width);
           this.grootteObstakels *= this.factorObstakels;
-          if (this.obstakels.length % this.veranderingSnelheid == 0) {
+          if (this.snelheidObstakels % 10) {
               this.snelheidObstakels += this.snelheidsVeranderingObstakels;
           }
       }
@@ -201,8 +201,8 @@ class spelletjuh {
   tekenScorebord() {
       push();
       if (!this.afgelopen && this.speler.vx == 0) {
-        var score = floor((frameCount - this.startTijd) / 100) + 10 * this.snelheidObstakels - 10 - gameSettings[4];
-        var level = 1 + floor((frameCount - this.startTijd) / 500);
+        var score = floor((frameCount - this.startTijd) / 100) + 2 * this.snelheidObstakels - 4;
+        var level = 1 + floor(score / 10);
         fill(250,250,250,.5);
         noStroke();
         rect(30,30,200,70);
@@ -253,7 +253,8 @@ function setup() {
   textFont("Monospace");
   textSize(44);
   textAlign(CENTER,CENTER);
-  spel = new spelletjuh (gameSettings);
+  spel = new spelletjuh ;
+  //(gameSettings);
 }
 
 function draw() {
