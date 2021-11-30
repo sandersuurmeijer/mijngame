@@ -1,5 +1,3 @@
-//var gameSettings = [200,6,0.5,0.5,3];
-
 class vliegtuig {
   constructor(jpg) {
     this.afbeelding = jpg;
@@ -75,7 +73,7 @@ class Obstakel2 {
     this.y = y;
     this.b = b;
     this.h = h;
-    this.wolkenkrabber = png;
+    this.bomraket = png;
   }
 
   beweeg(v) {
@@ -115,8 +113,10 @@ class spelletjuh {
     this.snelheidsVeranderingObstakels = 0.5;
     this.veranderingSnelheid = 3; 
     this.obstakels = [];
+    this.obstakels2 = [];
         for (var tellen = 0;tellen<this.aantalObstakels;tellen++) {
-            this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1));
+            this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1))
+            this.maakObstakel2(this.afstandObstakels*(this.obstakels.length + 1));
     }
     this.eindTekst = "je bent af LOSER";
     this.startTijd = null;
@@ -135,7 +135,7 @@ class spelletjuh {
   maakObstakel2(x) {
     var y = 0;
     var hoogte = 150;
-    var positie =  random(250, 300);
+    var positie =  random(0, 100);
     if (round(random(0,1)) == 0) {
         y = canvas.height - positie;
     }
@@ -176,6 +176,7 @@ class spelletjuh {
       fill('red');
       if (this.obstakels[this.obstakels.length - 1].x <= canvas.width - this.afstandObstakels) {
           this.maakObstakel(canvas.width);
+          this.maakObstakel2(canvas.width);
           this.grootteObstakels *= this.factorObstakels;
           if (this.snelheidObstakels % 10) {
               this.snelheidObstakels += this.snelheidsVeranderingObstakels;
@@ -186,7 +187,14 @@ class spelletjuh {
           this.speler.vx = 0;
           this.afgelopen = true;
         }
+
+     //   if(this.obstakels2[o].raakt(this.speler) || this.speler.y >= canvas.height) {
+     //     this.speler.vx = 0;
+     //     this.afgelopen = true;
+     //   }
+
         this.obstakels[o].beweeg(this.snelheidObstakels);
+        this.obstakels2[o].beweeg(this.snelheidObstakels);
       }
       if (this.speler.x >= canvas.width - this.speler.breedte - this.speler.marge) {
         this.speler.vx = 0;
@@ -201,7 +209,7 @@ class spelletjuh {
   tekenScorebord() {
       push();
       if (!this.afgelopen && this.speler.vx == 0) {
-        var score = floor((frameCount - this.startTijd) / 100) + 2 * this.snelheidObstakels - 4;
+        var score = floor((frameCount - this.startTijd) / 100 * this.snelheidObstakels) - 3;
         var level = 1 + floor(score / 10);
         fill(250,250,250,.5);
         noStroke();
@@ -214,7 +222,7 @@ class spelletjuh {
   }
 
   teken() {
-    background(255); // svg bug
+    background(255); 
     background(achtergrond);
     if (!this.actief) {
       this.beginScherm();
@@ -239,7 +247,7 @@ function preload() {
   F16 = loadImage("images/jemoeder.jpg");
   achtergrond = loadImage("images/achtergrond.jpg");
   wolkenkrabber = loadImage("images/wolkenkrabber.png");
-  bomraket = loadImage("images/bomraket kopiëren.png")
+  bomraket = loadImage("images/bomraket_kopiëren.png")
 
 }
 
@@ -254,7 +262,7 @@ function setup() {
   textSize(44);
   textAlign(CENTER,CENTER);
   spel = new spelletjuh ;
-  //(gameSettings);
+
 }
 
 function draw() {
