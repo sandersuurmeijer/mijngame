@@ -57,8 +57,9 @@ class Obstakel {
   raakt(vliegtuig) { 
       if(vliegtuig.x + vliegtuig.breedte - vliegtuig.marge > this.x && vliegtuig.x + vliegtuig.marge < this.x + this.b &&
         vliegtuig.y  - vliegtuig.marge > this.y && vliegtuig.y + vliegtuig.marge + 50 < this.y + this.h)
-        {
+        {      
       return true;
+      
     }
     else {
       return false;
@@ -113,7 +114,7 @@ class spelletjuh {
     strokeWeight(2);
     stroke(0);
     fill(200,200,200,.5);
-    text("Wrong Way!\n \Gebruik de pijltjestoetsen om te vliegen en ontwijk de bommen. Druk enter om te starten.",0,0,canvas.width,canvas.height);
+    text("Wrong Way!\n Gebruik de pijltjestoetsen om te vliegen en ontwijk de bommen. Druk enter om te starten.",0,0,canvas.width,canvas.height);
     pop();
   }
 
@@ -124,7 +125,6 @@ class spelletjuh {
     stroke('yellow');
     strokeWeight(3);
     text(this.eindTekst+'\nDruk ENTER voor nieuw spel.\n',0,0,canvas.width,canvas.height * 1 / 3);
-    ontploffing.play();
     pop();
   }
 
@@ -158,8 +158,8 @@ class spelletjuh {
   tekenScorebord() {
       push();
       if (!this.afgelopen && this.speler.vx == 0) {
-        var score = floor((frameCount - this.startTijd) / 100 * this.snelheidObstakels) - 3;
-        var level = 1 + floor(score / 10);
+        var score = floor((frameCount - this.startTijd) / 150 * this.snelheidObstakels) - 3;
+        var level = 1 + floor(score / (20 + this.snelheidObstakels));
         fill(250,250,250,.5);
         noStroke();
         rect(30,30,150,40);
@@ -189,6 +189,7 @@ class spelletjuh {
   }
 }
 
+laadJavascriptFile('JS/P5/addons/p5.sound.js');
 
 var canvasH = 400;
 var canvasB;
@@ -196,7 +197,8 @@ function preload() {
   F16 = loadImage("images/F16_kopiëren.png");
   achtergrond = loadImage("images/achtergrond.jpg");
   bomraket = loadImage("images/bomraket_kopiëren.png");
-  ontploffing = loadSound("images/explosie.wav")
+  achtergrondmuziek = loadSound("sounds/background/achtergrondmuziek.mp3");
+  ping = loadSound("sounds/effects/typemachine_ping.ogg");
 
 }
 
@@ -209,6 +211,8 @@ function setup() {
   textSize(44);
   textAlign(CENTER,CENTER);
   spel = new spelletjuh ;
+  achtergrondmuziek.loop();
+  ping.play();
 
 }
 
@@ -227,3 +231,4 @@ function keyTyped() {
     setup();
   }
 }
+ 
