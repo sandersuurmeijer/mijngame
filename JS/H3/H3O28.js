@@ -89,7 +89,7 @@ class spelletjuh {
         for (var tellen = 0;tellen<this.aantalObstakels;tellen++) {
             this.maakObstakel(this.afstandObstakels*(this.obstakels.length + 1))
     }
-    this.eindTekst = "je bent af LOSER";
+    this.eindTekst = "Je bent af LOSER!";
     this.startTijd = null;
   }
 
@@ -114,7 +114,7 @@ class spelletjuh {
     strokeWeight(2);
     stroke(0);
     fill(200,200,200,.5);
-    text("Wrong Way!\n Gebruik de pijltjestoetsen om te vliegen en ontwijk de bommen. Druk enter om te starten.",0,0,canvas.width,canvas.height);
+    text("Wrong Way!\n\n Gebruik de pijltjestoetsen om te vliegen en ontwijk de bommen. Druk ENTER om te starten.",0,0,canvas.width,320);
     pop();
   }
 
@@ -124,7 +124,7 @@ class spelletjuh {
     fill(0);
     stroke('yellow');
     strokeWeight(3);
-    text(this.eindTekst+'\nDruk ENTER voor nieuw spel.\n',0,0,canvas.width,canvas.height * 1 / 3);
+    text(this.eindTekst+'\nDruk ENTER voor nieuw spel.\n',0,0,canvas.width,350);
     pop();
   }
 

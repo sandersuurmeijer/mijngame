@@ -6,3 +6,7 @@ html,body {
 body {
     overflow: hidden;
 }
+
+#processing {
+    margin-left: 20%;
+}

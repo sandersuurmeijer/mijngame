@@ -124,7 +124,7 @@ class spelletjuh {
     fill(0);
     stroke('yellow');
     strokeWeight(3);
-    text(this.eindTekst+'\nDruk ENTER voor nieuw spel.\n',0,0,canvas.width,canvas.height * 1 / 3);
+    text(this.eindTekst+'\nDruk enter voor nieuw spel.\n',0,0,canvas.width,canvas.height * 1 / 3);
     pop();
   }
 
@@ -189,7 +189,7 @@ class spelletjuh {
   }
 }
 
-laadJavascriptFile('JS/P5/addons/p5.sound.js');
+// laadJavascriptFile('JS/P5/addons/p5.sound.js');
 
 var canvasH = 400;
 var canvasB;
